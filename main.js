@@ -1,41 +1,99 @@
 'use strict';
+
+const app = require('app');
+const BrowserWindow = require('browser-window');
+const menubar = require('menubar');
 const electron = require('electron');
-const app = electron.app;  // Module to control application life.
-const BrowserWindow = electron.BrowserWindow;  // Module to create native browser window.
+const ipc = electron.ipcMain;
+const globalShortcut = electron.globalShortcut;
 
-// Report crashes to our server.
-electron.crashReporter.start();
+const DEBUG_MODE = false;
 
-// Keep a global reference of the window object, if you don't, the window will
-// be closed automatically when the JavaScript object is garbage collected.
-let mainWindow;
+var mainWindow = null;
 
-// Quit when all windows are closed.
 app.on('window-all-closed', function() {
-  // On OS X it is common for applications and their menu bar
-  // to stay active until the user quits explicitly with Cmd + Q
-  if (process.platform != 'darwin') {
+  if (process.platform !== 'darwin') {
     app.quit();
   }
 });
 
-// This method will be called when Electron has finished
-// initialization and is ready to create browser windows.
+
+
 app.on('ready', function() {
-  // Create the browser window.
-  mainWindow = new BrowserWindow({width: 800, height: 600});
+　　var screen = require('screen');
+　　var size = screen.getPrimaryDisplay().size;
+  mainWindow = new BrowserWindow({
+  　width: size.width,
+　　height: size.height,
+    fullscreen: false,
+    kiosk: false,
+    show: true,
+    resizable: true,
+    'window-position': 'center',
+    'always-on-top': false,
+    preloadWindow: true,
+    'node-integration': true,
+    frame: true,
+    transparent: false,
+    center: true,
+    darkTheme: true,
+    'auto-hide-menu-bar': false
+  });
 
-  // and load the index.html of the app.
-  mainWindow.loadURL(`file://${__dirname}/index.html`);
+  mainWindow.loadURL('file://' + __dirname + '/app/index.html');
 
-  // Open the DevTools.
-  mainWindow.webContents.openDevTools();
+  if (DEBUG_MODE) {
+    mainWindow.openDevTools();
+  }
 
-  // Emitted when the window is closed.
   mainWindow.on('closed', function() {
-    // Dereference the window object, usually you would store windows
-    // in an array if your app supports multi windows, this is the time
-    // when you should delete the corresponding element.
     mainWindow = null;
   });
+
+  ipc.on('window-open', function() {
+    mainWindow.show();
+  });
+
+  ipc.on('quit', function() {
+    app.quit();
+  });
+
+  const SHORTCUT_KEY = 'CommandOrControl+Shift+A';
+
+  const shortcutKeyReg = globalShortcut.register(SHORTCUT_KEY, function() {
+    console.log('Shortcut trigger pressed');
+
+    mainWindow[mainWindow.isVisible() ? 'hide' : 'show']();
+    mainWindow.webContents.send('window-open');
+  });
+
+  if (!shortcutKeyReg) {
+    console.error('Shortcut registration failed.');
+  }
+
+  if (!globalShortcut.isRegistered(SHORTCUT_KEY)) {
+    console.error('Shortcut not registered.');
+  }
 });
+
+const mb = menubar({
+  icon: __dirname + '/IconTemplate.png',
+  dir: __dirname,
+  index: 'file://' + __dirname + '/app/menubar.html',
+  width: 300,
+  height: 200,
+  'always-on-top': false,
+  preloadWindow: true,
+  'node-integration': true,
+  frame: false,
+  transparent: true,
+  darkTheme: true
+});
+
+mb.on('ready', function() {
+  mb.app.on('will-quit', function() {
+    globalShortcut.unregisterAll();
+  });
+});
+
+module.export = app;

@@ -1,0 +1,36 @@
+{
+  "name": "alexa-electrion",
+  "version": "0.0.1",
+  "description": "Alexa Electron application",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron main.js",
+    "build": "node build.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/miguelmota/alexa-electron.git"
+  },
+  "keywords": [
+    "alexa",
+    "echo",
+    "avs",
+    "ask",
+    "electron",
+    "app"
+  ],
+  "author": "Miguel Mota <hello@miguelmota.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/miguelmota/alexa-electron/issues"
+  },
+  "homepage": "https://github.com/miguelmota/alexa-electron#readme",
+  "devDependencies": {
+    "electron-packager": "^5.2.0",
+    "electron-prebuilt": "^0.35.0"
+  },
+  "dependencies": {
+    "menubar": "^3.0.0",
+    "open": "0.0.5"
+  }
+}

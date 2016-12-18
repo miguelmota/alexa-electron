@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html class="no-js">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Alexa</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.4.0/animate.min.css">
+    <link rel="stylesheet" href="styles/menubar.css">
+  </head>
+  <body>
+    <main class="main">
+      <div class="menubar">
+        <div class="menubar__chevron"></div>
+        <div class="menubar__content">
+            <div class="menubar__header">
+              <h1 class="menubar__header__title">Alexa</h1>
+            </div>
+            <ul class="menubar__list">
+              <li class="menubar__list__item">
+                <a class="menubar__list__item__link" href clickAction="openWindow">Show window</a>
+              </li>
+              <li class="menubar__list__item">
+                <a class="menubar__list__item__link" href clickAction="logOut">Log out</a>
+              </li>
+              <li class="menubar__list__item">
+                <a class="menubar__list__item__link" href clickAction="quit">Quit</a>
+              </li>
+              <li class="menubar__list__item">
+                <a class="menubar__list__item__link" href clickAction="about">About</a>
+              </li>
+            </ul>
+            <div class="menubar__footer">
+              <p class="menubar__footer__version">v0.0.1</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/zepto/1.1.6/zepto.js"></script>
+    <script src="./scripts/menubar.js"></script>
+  </body>
+</html>

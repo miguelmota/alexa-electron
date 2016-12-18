@@ -1,0 +1,129 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  background: transparent;
+  width: 100%;
+  overflow: hidden;
+}
+
+body {
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 12px;
+}
+
+.main {
+  display: block;
+  width: 100%;
+  padding: 10px;
+}
+
+.container {
+  width: 100%;
+  position: relative;
+  color: #767676;
+}
+
+.menubar__chevron {
+  position: absolute;
+  left: 50%;
+	background: #ededed;
+	border: 1px solid #dddddd;
+  z-index: 1;
+}
+
+.menubar__chevron:after,
+.menubar__chevron:before {
+	bottom: 100%;
+	left: 50%;
+	border: solid transparent;
+	content: " ";
+	height: 0;
+	width: 0;
+	position: absolute;
+	pointer-events: none;
+}
+
+.menubar__chevron:after {
+	border-color: rgba(255, 0, 0, 0);
+	border-bottom-color: #ededed;
+	border-width: 10px;
+	margin-left: -10px;
+}
+
+.menubar__chevron:before {
+	border-color: rgba(221, 221, 221, 0);
+	border-bottom-color: #dddddd;
+	border-width: 11px;
+	margin-left: -11px;
+}
+
+.menubar__header {
+  padding: 5px 10px;
+  border-bottom: 1px solid #ddd;
+  text-align: center;
+}
+
+.menubar__header__title {
+  font-size: 14px;
+  font-weight: normal;
+  color: #222;
+}
+
+.menubar__content {
+  position: relative;
+  border-radius: 5px;
+  box-shadow: rgba(0, 0, 0, 0.4) 0 3px 10px;
+  background: #ededed;
+  border: 1px solid #ddd;
+}
+
+.menubar__list {
+  display: block;
+  width: 100%;
+  list-style: none;
+  background: #fff;
+  max-height: 110px;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.menubar__list__item {
+  display: block;
+  width: 100%;
+  font-size: 11px;
+}
+
+.menubar__list__item__link {
+  display: block;
+  text-decoration: none;
+  color: #555;
+  padding: 10px 14px;
+  border-bottom: 1px solid #eee;
+  transition: all 0.2s ease-out;
+}
+
+.menubar__list__item:last-child .menubar__list__item__link {
+  border-bottom: none;
+}
+
+.menubar__list__item__link:hover {
+  text-decoration: none;
+  background: #f2f8fc;
+  cursor: default;
+}
+
+.menubar__footer {
+  padding: 5px 8px;
+  text-align: center;
+  border-top: 1px solid #ddd;
+}
+
+.menubar__footer__version {
+  font-size: 10px;
+  color: #999;
+}
