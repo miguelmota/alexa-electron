@@ -1,7 +1,5 @@
 # alexa-electron
 
-DEPRE
-
 **NOTE: THIS IS DEPRECATED**
 
 # Install
